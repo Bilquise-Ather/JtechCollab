@@ -1,0 +1,19 @@
+<div class="main-page-content">
+  <div class="setting-menu-bar">
+    <ul class="menu-ul">
+      <li>
+        <a routerLink="/tiles-page/19x19" routerLinkActive="active" (click)="onClickLink(0)">19x19</a>
+      </li>
+      <li>
+        <a routerLink="/tiles-page/24x24" routerLinkActive="active" (click)="onClickLink(1)">24x24</a>
+      </li>
+      <li>
+        <a routerLink="/tiles-page/color-options" routerLinkActive="active" (click)="onClickLink(1)">Color Specification</a>
+      </li>
+
+    </ul>
+  </div>
+  <div class="settings-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

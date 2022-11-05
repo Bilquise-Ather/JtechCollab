@@ -1,0 +1,27 @@
+<div class="main-page-content">
+  <div class="setting-menu-bar">
+    <ul class="menu-ul">
+      <li>
+        <a routerLink="/common-pages/terms-condition" routerLinkActive="active" (click)="onClickLink(0)">Terms
+          Condition</a>
+      </li>
+      <li>
+        <a routerLink="/common-pages/privacy-policy" routerLinkActive="active" (click)="onClickLink(1)">Privacy
+          Policy</a>
+      </li>
+      <li>
+        <a routerLink="/common-pages/about-us" routerLinkActive="active" (click)="onClickLink(2)">About Us</a>
+      </li>
+      <li>
+        <a routerLink="/common-pages/faqs" routerLinkActive="active" (click)="onClickLink(3)">FAQs</a>
+      </li>
+      <li>
+        <a routerLink="/common-pages/footer_website_data" routerLinkActive="active" (click)="onClickLink(3)">Footer
+          Data</a>
+      </li>
+    </ul>
+  </div>
+  <div class="settings-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

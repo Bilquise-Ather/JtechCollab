@@ -1,0 +1,189 @@
+<div class="container-fluid management-tab">
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+  <div class="row section-box">
+    <div class="col-12">
+      {{ type | titlecase }} product
+      <div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <form #f="ngForm" novalidate autocomplete="off">
+            <div class="row">
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Product Name <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="fname" placeholder="Enter Product Name" name="productname"
+                    #productname="ngModel" [(ngModel)]="product.productname" required
+                    [class.is-invalid]="f.submitted && productname.invalid">
+                  <div class="alert alert-danger" *ngIf="(productname.touched || f.submitted) && productname.invalid">
+                    <p>Product Name can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Product Slug <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="fname" placeholder="Enter Product Slug" name="productslug"
+                    #productslug="ngModel" [(ngModel)]="product.slug" required
+                    [class.is-invalid]="f.submitted && productname.invalid" (keyup)="generateSlug($event)">
+                  <div class="alert alert-danger" *ngIf="(productslug.touched || f.submitted) && productslug.invalid">
+                    <p>Product Name can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectionname">SEO Title <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="seotitle" placeholder="Enter SEO Title" name="seotitle"
+                    #seotitle="ngModel" [(ngModel)]="product.seotitle" required
+                    [class.is-invalid]="f.submitted && seotitle.invalid">
+                  <div class="alert alert-danger" *ngIf="(seotitle.touched || f.submitted) && seotitle.invalid">
+                    <p>SEO Title can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectionname">SEO Description <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="seodescription" placeholder="Enter SEO Description"
+                    name="seodescription" #seodescription="ngModel" [(ngModel)]="product.seodescription" required
+                    [class.is-invalid]="f.submitted && seodescription.invalid">
+                  <div class="alert alert-danger"
+                    *ngIf="(seodescription.touched || f.submitted) && seodescription.invalid">
+                    <p>SEO Description can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectiontext">SEO Keywords <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="seokeyword" placeholder="Enter Keywords" name="seokeyword"
+                    #seokeyword="ngModel" [(ngModel)]="product.seokeyword" required
+                    [class.is-invalid]="f.submitted && seokeyword.invalid">
+                  <div class="alert alert-danger" *ngIf="(seokeyword.touched || f.submitted) && seokeyword.invalid">
+                    <p>Keywords Text can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectiontext">Video Link </label>
+                  <input type="text" class="form-control" id="videolink" placeholder="Enter Video Link" name="videolink"
+                    #videolink="ngModel" [(ngModel)]="product.videolink">
+                </div>
+              </div>
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Image</label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="product.productImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="product.productImageUrl" /></div>
+                      <div class="close-btn-wrapper" (click)="clearCLFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="product.image && !product.productImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="base_url+'/'+product.image" /></div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="productImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #productImageFile type="file" (change)="onCLUpload($event)" accept="image/*"
+                      style="display: none" />
+                  </button>
+                </div>
+              </div>
+              <div class=" col-12 ">
+                <div class=" form-group">
+                  <div>
+                    <label>Optional Images</label>
+                  </div>
+                  <div *ngFor='let url of already_uploadedurls;let i=index;'>
+                    <img *ngIf="!url.isdelete" [src]="base_url+'/'+url.image" height="200">
+                    <div *ngIf="!url.isdelete" class="close-btn-wrapper"
+                      (click)="clearAlreadyUploadedFile(url.baseimage)"><i class="fa fa-times-circle"
+                        aria-hidden="true"></i></div>
+                  </div>
+                  <div *ngFor='let url of urls;let i=index;'>
+                    <img *ngIf="!url.isdelete" [src]="url.url" height="200">
+                    <div *ngIf="!url.isdelete" class="close-btn-wrapper" (click)="clearOptionalFile(i)"><i
+                        class="fa fa-times-circle" aria-hidden="true"></i></div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="productoptionalImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #productoptionalImageFile type='file' (change)="onSelectFile($event)" multiple
+                      accept="image/*" [class.is-invalid]="f.submitted && productoptionalImageFile.invalid"
+                      style="display: none">
+                  </button>
+                  <div class="alert alert-danger"
+                    *ngIf="(type=='add' && f.submitted && already_uploadedurls.length <= 0 ) || (type=='edit' && f.submitted && urls.length==0 ) ">
+                    <p>Sub Product Image can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Select Parent Collection <span class="c-red">*</span></label>
+                  <p-dropdown name="parentcollection" #parentcollection="ngModel" [options]="collection_data" placeholder="Select Product" [(ngModel)]="product.parentcollection" optionLabel="name" optionValue="_id">
+                </p-dropdown>
+                </div>
+              </div>
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Select Collection <span class="c-red">*</span></label>
+                  <p-multiSelect #collection="ngModel" id="collection" name="collection" [options]="collection_data"
+                    optionValue="_id" optionLabel="name" placeholder="Select Collections"
+                    defaultLabel="Select Collections" [(ngModel)]="product.selectedCollection"
+                    [ngModelOptions]="{standalone: true}"></p-multiSelect>
+                  <div class="alert alert-danger"
+                    *ngIf="(collection.touched && (collection.invalid || (!product.selectedCollection || product.selectedCollection.length == 0)))">
+                    <div>Select Collection</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Select Category</label>
+                  <p-multiSelect #category="ngModel" id="category" name="category" [options]="category_data"
+                    optionValue="_id" optionLabel="name" placeholder="Select Category" defaultLabel="Select Category"
+                    [(ngModel)]="product.selectedCategory" [ngModelOptions]="{standalone: true}"></p-multiSelect>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="col-12">
+                <button *ngIf="!product._id"
+                  [disabled]="f.invalid || !product.selectedCollection || !product.productImageFile" type="submit"
+                  class="btn green-btn" (click)="onClickSave()">Save Product</button>
+                <button *ngIf="product._id" [disabled]="f.invalid || !product.selectedCollection" type="submit"
+                  class="btn green-btn" (click)="onClickSave()">Update Product</button>
+                <button type="button" class="btn gray-btn ml-4" (click)="onClickCancel()">Cancel</button>
+              </div>
+            </div>
+          </form>
+          <div>
+          </div>
+
+
+
+
+          <app-footer></app-footer>
+        </div>
+        <!-- End of Footer -->

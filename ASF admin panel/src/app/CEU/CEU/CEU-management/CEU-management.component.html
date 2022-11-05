@@ -1,0 +1,103 @@
+<div class="container-fluid management-tab">
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+
+  <div class="row" style="justify-content: space-between;margin:0px;margin-bottom: 2rem;">
+    <h1 class="h3 page-title">CEU</h1>
+  </div>
+  <div class="row" *ngIf="!editformdata && setting_Obj">
+    <div class="col-12">
+      <div class="c-table-wrapper table-responsive-small">
+        <div class="availabledata">
+          <table class="c-table">
+            <thead class="c-table-header">
+              <tr class="c-table-row c-table-row-header">
+                <div style="width: 5px;"></div>
+              </tr>
+            </thead>
+            <tbody class="c-table-body">
+              <tr class="c-table-row">
+                <td class="c-table-cell c-table-body-cell text-pull-left">image
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">
+                  <img height="100" [src]="base_url +'/'+ this.setting_Obj.image">
+                </td>
+              </tr>
+              <tr class="c-table-row">
+                <td class="c-table-cell c-table-body-cell text-pull-left">text
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.text}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="footer-block  mb-2 mt-4">
+            <button type="submit" class="btn green-btn" (click)="editformdata=true">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-body custom-modal-body" *ngIf="editformdata">
+    <form #f="ngForm" novalidate autocomplete="off">
+      <div class="row">
+        <div class="col-12 ">
+          <div class="form-group">
+            <div>
+              <label>Slider Image</label>
+            </div>
+            <div class="uploaded-file-block" *ngIf="setting_Obj.sliderImageUrl">
+              <div class="file-detail-wrap">
+                <div class="uimage"><img width="100px" [src]="setting_Obj.sliderImageUrl" /></div>
+                <div class="close-btn-wrapper" (click)="clearCLFile()"><i class="fa fa-times-circle"
+                    aria-hidden="true"></i></div>
+              </div>
+            </div>
+            <div class="uploaded-file-block" *ngIf="setting_Obj.image && !setting_Obj.sliderImageUrl">
+              <div class="file-detail-wrap">
+                <div class="uimage"><img width="100px" [src]="base_url+'/'+setting_Obj.image" /></div>
+
+              </div>
+            </div>
+            <button type="button" class="btn dark-blue-btn" (click)="sliderImageFile.click()">
+              <div>
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Upload
+              </div>
+              <input #sliderImageFile type="file" (change)="onCLUpload($event)" accept="image/*"
+                style="display: none" />
+            </button>
+          </div>
+        </div>
+
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Text</label>
+            <input type="text" class="form-control" id="text" name="text" placeholder="Enter text link" #text="ngModel"
+              [(ngModel)]="this.setting_Obj.text" required />
+            <div class="alert alert-danger" *ngIf="text.touched && text.invalid">
+              <p>Text can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row mt-4 mb-4">
+        <div class="col-12">
+          <button type="submit" class="btn green-btn" (click)="updateCEU()">Update</button>
+          <button type="button" class="btn gray-btn ml-4" (click)="editformdata=false">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+</div>
+
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- End of Footer -->

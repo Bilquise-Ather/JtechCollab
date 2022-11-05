@@ -1,0 +1,17 @@
+<div class="img-rating">
+  <img
+    [src]="(rate_image_hover>=1 || selected_rating>=1)? '../../../assets/img/staryellow.png' : '../../../assets/img/starempty.png'"
+    (mouseover)="rate_image_hover = 1" (mouseout)="rate_image_hover = 0" (click)="ratingClick(1)">
+  <img
+    [src]="(rate_image_hover>=2 || selected_rating>=2) ? '../../../assets/img/staryellow.png' : '../../../assets/img/starempty.png'"
+    (mouseover)="rate_image_hover = 2" (mouseout)="rate_image_hover = 0" (click)="ratingClick(2)">
+  <img
+    [src]="(rate_image_hover>=3 || selected_rating>=3) ? '../../../assets/img/staryellow.png' : '../../../assets/img/starempty.png'"
+    (mouseover)="rate_image_hover = 3" (mouseout)="rate_image_hover = 0" (click)="ratingClick(3)">
+  <img
+    [src]="(rate_image_hover>=4 || selected_rating>=4) ? '../../../assets/img/staryellow.png' : '../../../assets/img/starempty.png'"
+    (mouseover)="rate_image_hover = 4" (mouseout)="rate_image_hover = 0" (click)="ratingClick(4)">
+  <img
+    [src]="(rate_image_hover>=5 || selected_rating>=5) ? '../../../assets/img/staryellow.png' : '../../../assets/img/starempty.png'"
+    (mouseover)="rate_image_hover = 5" (mouseout)="rate_image_hover = 0" (click)="ratingClick(5)">
+</div>

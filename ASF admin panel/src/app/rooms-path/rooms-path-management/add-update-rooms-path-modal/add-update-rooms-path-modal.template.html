@@ -1,0 +1,104 @@
+<ngx-loading [show]="loading"
+  [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+</ngx-loading>
+
+<div class="modal-header custom-modal-header">
+  <div style="font-size: 20px;">
+    {{dialogType == 'update' ? 'Update Room' : 'Add Room'}}
+  </div>
+  <div class="modal-header-close-btn" (click)="onClose()">
+    x
+  </div>
+</div>
+
+<div class="modal-body custom-modal-body">
+  <form #f="ngForm" novalidate autocomplete="off" *ngIf="slider_obj">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="productname">Room<span class="c-red">*</span></label>
+          <p-dropdown name="mainproduct" #mainproduct="ngModel" [options]="main_product_list"
+            placeholder="Select Category" [(ngModel)]="slider_obj.room_id" optionLabel="slidertext" optionValue="_id">
+          </p-dropdown>
+          <div class="alert alert-danger"
+            *ngIf="(mainproduct.touched || f.submitted) && (mainproduct.invalid || !slider_obj.room_id)">
+            <p>Room can't be blank.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="productname">Floor<span class="c-red">*</span></label>
+          <p-dropdown [filter]="true" name="productoption" #productoption="ngModel" [options]="product_options_list"
+            placeholder="Select Floor" [(ngModel)]="slider_obj.productoption_id" optionLabel="name" optionValue="_id">
+          </p-dropdown>
+          <div class="alert alert-danger"
+            *ngIf="(productoption.touched || f.submitted) && (productoption.invalid || !slider_obj.productoption_id)">
+            <p>Floor can't be blank.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="form-group">
+          <label for="productname">Select Collection <span class="c-red">*</span></label>
+          <p-multiSelect #collection="ngModel" id="collection" name="collection" [options]="collection_data"
+            optionValue="_id" optionLabel="name" placeholder="Select Collections" defaultLabel="Select Collections"
+            [(ngModel)]="slider_obj.collections" [ngModelOptions]="{standalone: true}"></p-multiSelect>
+          <div class="alert alert-danger"
+            *ngIf="(collection.touched && (collection.invalid || (!slider_obj.collections || slider_obj.collections.length == 0)))">
+            <div>Select Collection</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Image</label>
+          </div>
+
+          <div class="uploaded-file-block" *ngIf="slider_obj.sliderImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" alt="image" [src]="slider_obj.sliderImageUrl" /></div>
+              <div class="close-btn-wrapper" (click)="clearCLFile()"><i class="fa fa-times-circle"
+                  aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <div class="uploaded-file-block" *ngIf="slider_obj.image && !slider_obj.sliderImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" alt="image" [src]="base_url+'/'+slider_obj.image" /></div>
+
+            </div>
+          </div>
+          <button type="button" class="btn dark-blue-btn" (click)="sliderImageFile.click()">
+            <div>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Upload
+            </div>
+            <input #sliderImageFile type="file" (change)="onCLUpload($event)" accept="image/*" style="display: none" />
+          </button>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Label</label>
+          <input type="text" class="form-control" id="label" name="label" placeholder="Enter Label" #label="ngModel"
+            [(ngModel)]="slider_obj.label" required />
+          <div class="alert alert-danger" *ngIf="label.touched && label.invalid">
+            <p>Text can't be blank.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-block  mb-2 mt-4">
+      <button type="submit" *ngIf="dialogType == 'add'" class="btn green-btn" [disabled]="f.invalid"
+        (click)="addSlider()">Add
+        Room</button>
+      <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn" [disabled]="f.invalid"
+        (click)="updateSlider()">Update Room</button>
+      <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
+    </div>
+  </form>
+</div>

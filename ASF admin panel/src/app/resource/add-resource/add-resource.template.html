@@ -1,0 +1,115 @@
+<div class="container-fluid management-tab">
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+  <div class="row section-box">
+    <div class="col-12">
+      {{ type | titlecase }} Resource
+      <div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <form #f="ngForm" novalidate autocomplete="off" *ngIf="resource_Obj">
+            <div class="row">
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Resource Image</label>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="resource_Obj.resourceImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="resource_Obj.resourceImageUrl" /></div>
+                      <div class="close-btn-wrapper" (click)="clearCLFile1()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block"
+                    *ngIf="resource_Obj.resource_image && !resource_Obj.resourceImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="resource_Obj.resource_image" /></div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="resourceImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #resourceImageFile type="file" (change)="onCLUpload1($event)" accept="image/*"
+                      style="display: none" />
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Logo Image</label>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="resource_Obj.resourceLogoUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="resource_Obj.resourceLogoUrl" /></div>
+                      <div class="close-btn-wrapper" (click)="clearCLFile2()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="resource_Obj.resource_logo && !resource_Obj.resourceLogoUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="resource_Obj.resource_logo" /></div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="resourceLogoImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #resourceLogoImageFile type="file" (change)="onCLUpload2($event)" accept="image/*" required
+                      style="display: none" />
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Resource Name <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="resourceName" placeholder="Enter Resource Name"
+                    name="resourcename" #resourceName="ngModel" [(ngModel)]="resource_Obj.resourcename" required
+                    [class.is-invalid]="f.submitted && resourceName.invalid">
+                  <div class="alert alert-danger" *ngIf="(resourceName.touched || f.submitted) && resourceName.invalid">
+                    <p>Resource Name can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Resource Content <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="resourceContent" placeholder="Enter Resource Content"
+                    name="resourceContent" #resourceContent="ngModel" [(ngModel)]="resource_Obj.resourceContent"
+                    required [class.is-invalid]="f.submitted && resourceContent.invalid">
+                  <div class="alert alert-danger"
+                    *ngIf="(resourceContent.touched || f.submitted) && resourceContent.invalid">
+                    <p>Resource Content can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="col-12">
+                <button *ngIf="!resource_Obj._id"
+                  [disabled]="f.invalid || !resource_Obj.resourceImageFile || !resource_Obj.resourceLogoImageFile"
+                  type="submit" class="btn green-btn" (click)="onClickSave()">Save Resource</button>
+                <button *ngIf="resource_Obj._id" [disabled]="f.invalid" type="submit" class="btn green-btn"
+                  (click)="onClickSave()">Update Resource</button>
+                <button type="button" class="btn gray-btn ml-4" (click)="onClickCancel()">Cancel</button>
+              </div>
+            </div>
+          </form>
+          <div>
+          </div>
+
+          <app-footer></app-footer>
+        </div>
+        <!-- End of Footer -->

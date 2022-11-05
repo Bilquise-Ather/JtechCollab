@@ -1,0 +1,38 @@
+<ngx-loading [show]="loading"
+  [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+</ngx-loading>
+
+<div class="modal-header custom-modal-header">
+  <div style="font-size: 20px;">
+    Add {{type}}
+  </div>
+  <div class="modal-header-close-btn" (click)="onClose()">
+    x
+  </div>
+</div>
+
+<div class="modal-body custom-modal-body">
+  <form #f="ngForm" novalidate autocomplete="off" *ngIf="data">
+    <div class="row">
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Text</label>
+          <input type="text" class="form-control" id="text" name="text" placeholder="Enter Text" #text="ngModel"
+            [(ngModel)]="data.text" required />
+          <div class="alert alert-danger" *ngIf="text.touched && text.invalid">
+            <p>Text can't be blank.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="footer-block  mb-2 mt-4">
+      <button type="submit" class="btn green-btn" [disabled]="f.invalid || !data.text "
+        (click)="addSlider()">Add</button>
+      <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,16 @@
+<div class="main-page-content">
+  <div class="setting-menu-bar">
+    <ul class="menu-ul">
+      <li>
+        <a routerLink="/resource-page/resource" routerLinkActive="active" (click)="onClickLink(0)">Resource</a>
+      </li>
+      <li>
+        <a routerLink="/resource-page/resource_options" routerLinkActive="active" (click)="onClickLink(1)">Reaource
+          Options</a>
+      </li>
+    </ul>
+  </div>
+  <div class="settings-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

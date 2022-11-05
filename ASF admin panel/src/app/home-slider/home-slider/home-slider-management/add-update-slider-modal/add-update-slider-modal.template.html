@@ -1,0 +1,68 @@
+<ngx-loading [show]="loading"
+  [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+</ngx-loading>
+
+<div class="modal-header custom-modal-header">
+  <div style="font-size: 20px;">
+    {{dialogType == 'update' ? 'Update Slider' : 'Add Slider'}}
+  </div>
+  <div class="modal-header-close-btn" (click)="onClose()">
+    x
+  </div>
+</div>
+
+<div class="modal-body custom-modal-body">
+  <form #f="ngForm" novalidate autocomplete="off" *ngIf="slider_obj">
+    <div class="row">
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Slider Image</label>
+          </div>
+          <div class="uploaded-file-block" *ngIf="slider_obj.sliderImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="slider_obj.sliderImageUrl" /></div>
+              <div class="close-btn-wrapper" (click)="clearCLFile()"><i class="fa fa-times-circle"
+                  aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <div class="uploaded-file-block" *ngIf="slider_obj.image && !slider_obj.sliderImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="base_url+'/'+slider_obj.image" /></div>
+
+            </div>
+          </div>
+          <button type="button" class="btn dark-blue-btn" (click)="sliderImageFile.click()">
+            <div>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Upload
+            </div>
+            <input #sliderImageFile type="file" (change)="onCLUpload($event)" accept="image/*" style="display: none" />
+          </button>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Slider Text</label>
+          <input type="text" class="form-control" id="slidertext" name="slidertext" placeholder="Enter Slider Text"
+            #slidertext="ngModel" [(ngModel)]="slider_obj.slidertext" required />
+          <div class="alert alert-danger" *ngIf="slidertext.touched && slidertext.invalid">
+            <p>Text can't be blank.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="footer-block  mb-2 mt-4">
+      <button type="submit" *ngIf="dialogType == 'add'" class="btn green-btn"
+        [disabled]="f.invalid || !slider_obj.slidertext || !slider_obj.sliderImageUrl" (click)="addSlider()">Add
+        Slider</button>
+      <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn"
+        [disabled]="f.invalid || !slider_obj.slidertext" (click)="updateSlider()">Update Slider</button>
+      <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,38 @@
+<div class="main-page-content">
+  <div class="setting-menu-bar">
+    <ul class="menu-ul">
+      <li>
+        <a routerLink="/seo-settings/faqs-seo" routerLinkActive="active" (click)="onClickLink(0)">FAQs SEO</a>
+      </li>
+      <li>
+        <a routerLink="/seo-settings/contact-us-seo" routerLinkActive="active" (click)="onClickLink(1)">Contact Us
+          SEO</a>
+      </li>
+      <li>
+        <a routerLink="/seo-settings/resource-seo-setting" routerLinkActive="active" (click)="onClickLink(1)">Resource
+          Seo</a>
+      </li>
+      <li>
+        <a routerLink="/seo-settings/DIY-seo" routerLinkActive="active" (click)="onClickLink(0)">DIY SEO</a>
+      </li>
+      <li>
+        <a routerLink="/seo-settings/CEU-seo" routerLinkActive="active" (click)="onClickLink(0)">CEU SEO</a>
+      </li>
+      <li>
+        <a routerLink="/seo-settings/search-seo" routerLinkActive="active" (click)="onClickLink(0)">Search SEO</a>
+      </li>
+      <li>
+        <a routerLink="/seo-settings/gallery-seo" routerLinkActive="active" (click)="onClickLink(0)">Gallery SEO</a>
+      </li>
+      <li>
+        <a routerLink="/seo-settings/project-seo" routerLinkActive="active" (click)="onClickLink(0)">Projects SEO</a>
+      </li>
+      <li>
+        <a routerLink="/seo-settings/visualiser-seo" routerLinkActive="active" (click)="onClickLink(0)">Visualiser SEO</a>
+      </li>
+    </ul>
+  </div>
+  <div class="settings-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

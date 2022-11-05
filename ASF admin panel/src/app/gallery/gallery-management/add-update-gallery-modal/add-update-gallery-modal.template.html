@@ -1,0 +1,92 @@
+<ngx-loading [show]="loading"
+  [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+</ngx-loading>
+
+<div class="modal-header custom-modal-header">
+  <div style="font-size: 20px;">
+    {{dialogType == 'update' ? 'Update Gallery' : 'Add Gallery'}}
+  </div>
+  <div class="modal-header-close-btn" (click)="onClose()">
+    x
+  </div>
+</div>
+
+<div class="modal-body custom-modal-body">
+  <form #f="ngForm" novalidate autocomplete="off" *ngIf="slider_obj">
+    <div class="row">
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Image <span class="c-red">*</span></label>
+          </div>
+
+          <div class="uploaded-file-block" *ngIf="slider_obj.sliderImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="slider_obj.sliderImageUrl" /></div>
+              <div class="close-btn-wrapper" (click)="clearCLFile()"><i class="fa fa-times-circle"
+                  aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <div class="uploaded-file-block" *ngIf="slider_obj.image && !slider_obj.sliderImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="base_url+'/'+slider_obj.image" /></div>
+
+            </div>
+          </div>
+          <button type="button" class="btn dark-blue-btn" (click)="sliderImageFile.click()">
+            <div>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Upload
+            </div>
+            <input #sliderImageFile type="file" (change)="onCLUpload($event)" accept="image/*" style="display: none" />
+          </button>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="productname">Select Collection <span class="c-red">*</span></label>
+          <p-dropdown name="collection" #collection="ngModel" [options]="collection_data" placeholder="Select Collection" [(ngModel)]="slider_obj.selectedCollection" optionLabel="name" optionValue="_id">
+        </p-dropdown>
+
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" #name="ngModel"
+            [(ngModel)]="slider_obj.name" required />
+          <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+            <p>Text can't be blank.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-12 ">
+        <div class="form-group">
+          <label>Color</label>
+          <input type="text" class="form-control" id="color" name="color" placeholder="Enter color" #color="ngModel"
+            [(ngModel)]="slider_obj.color" required />
+          <div class="alert alert-danger" *ngIf="color.touched && color.invalid">
+            <p>Color can't be blank.</p>
+          </div>
+        </div>
+      </div> -->
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Link</label>
+          <input type="text" class="form-control" id="link" name="link" placeholder="Enter Link" #link="ngModel"
+            [(ngModel)]="slider_obj.link"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-block  mb-2 mt-4">
+      <button type="submit" *ngIf="dialogType == 'add'" class="btn green-btn"
+        [disabled]="f.invalid || !slider_obj.name || !slider_obj.sliderImageUrl || !slider_obj.selectedCollection"
+        (click)="addProductCategory()">Add</button>
+      <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn"
+        [disabled]="f.invalid || !slider_obj.name  || !slider_obj.selectedCollection" (click)="updateProductCategory()">Update category</button>
+      <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,24 @@
+<div class="main-page-content">
+  <div class="setting-menu-bar">
+    <ul class="menu-ul">
+      <li>
+        <a routerLink="/products-options-pages/collection" routerLinkActive="active"
+          (click)="onClickLink(0)">Collections</a>
+      </li>
+      <li>
+        <a routerLink="/products-options-pages/product-category" routerLinkActive="active"
+          (click)="onClickLink(1)">Product Categoty</a>
+      </li>
+      <li>
+        <a routerLink="/products-options-pages/products" routerLinkActive="active" (click)="onClickLink(2)">Products</a>
+      </li>
+      <li>
+        <a routerLink="/products-options-pages/product_options" routerLinkActive="active"
+          (click)="onClickLink(3)">Product Options</a>
+      </li>
+    </ul>
+  </div>
+  <div class="settings-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

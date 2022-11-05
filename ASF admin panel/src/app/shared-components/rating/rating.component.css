@@ -1,0 +1,15 @@
+.rating-text {
+  width: 100%;
+  text-align: center;
+  font-size: 1.3em;
+  font-family: OpenSans-Regular;
+  color: black;
+}
+.img-rating > img {
+  display: inline-block;
+  cursor: pointer;
+  display: inline-block;
+  cursor: pointer;
+  width: 20%;
+  padding: 5px;
+}

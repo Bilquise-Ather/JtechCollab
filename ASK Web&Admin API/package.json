@@ -1,0 +1,36 @@
+{
+  "name": "ASF",
+  "version": "0.0.1",
+  "description": "ASF services/api source",
+  "main": "app.js",
+  "scripts": {
+    "start": "SET NODE_ENV=local&& node app.js",
+    "test": "SET NODE_ENV=local&& mocha modules/test/*.js --timeout 10000"
+  },
+  "repository": {},
+  "keywords": [
+    ""
+  ],
+  "private": true,
+  "author": "WCCMS",
+  "license": "WCCMS",
+  "dependencies": {
+    "@sendgrid/mail": "^7.6.1",
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.6",
+    "expect.js": "^0.3.1",
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "md5": "^2.3.0",
+    "mongoose": "^5.12.14",
+    "multer": "^1.4.2",
+    "mysql2": "^2.2.5",
+    "nodemailer": "^6.6.2",
+    "nodemon": "^2.0.7",
+    "sequelize": "^6.6.2",
+    "swagger-jsdoc": "6.0.0",
+    "swagger-ui-express": "^4.1.6",
+    "validator": "^13.6.0"
+  }
+}

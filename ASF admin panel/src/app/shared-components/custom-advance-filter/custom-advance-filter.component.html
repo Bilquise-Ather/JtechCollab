@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-12">
+    <div class="form-group m-0" *ngIf="selectItems">
+      <table class="w-100" *ngIf="filters && filters.length>0">
+        <tbody>
+          <tr class="row">
+            <th class="col-lg-2 col-md-6 pr-0">
+              <label>Field</label>
+            </th>
+            <th class="col-lg-2 col-md-6 pr-0">
+              <label>Condition</label>
+            </th>
+            <th class="col-lg-2 col-md-6 pr-0">
+              <label>Value</label>
+            </th>
+            <th class="col-lg-2 col-md-6 pr-0"></th>
+          </tr>
+          <tr class="row" *ngFor="let tab of filters;let i=index;">
+            <td class="col-lg-2 col-md-6 pr-0 pb-2">
+              <p-dropdown [options]="selectItems" placeholder="Select Field" [(ngModel)]="tab.selectedfield"
+                optionLabel="fieldName" optionValue="fieldID" (onChange)="fieldChange($event,tab);applyFilter();">
+              </p-dropdown>
+            </td>
+
+            <td class="col-lg-2 col-md-6 pr-0 pb-2">
+              <p-dropdown [options]="tab.operator" placeholder="Select Operator" [(ngModel)]="tab.selectedoperator"
+                optionLabel="value" optionValue="id" (onChange)="applyFilter();"></p-dropdown>
+            </td>
+            <td class="col-lg-2 col-md-6 pr-0 pb-2">
+              <input [(ngModel)]="tab.returntype" name="{{'ctype'+i}}" type="hidden" />
+              <input *ngIf="tab.fieldType == 'text' || !tab.fieldType" [(ngModel)]="tab.selectedsearchtext"
+                name="{{'ctext'+i}}" placeholder="Search Keyword" class="form-control inner-input" type="text"
+                (keyup)="applyFilter();" />
+              <input *ngIf="tab.fieldType == 'number'" [(ngModel)]="tab.selectedsearchtext" name="{{'ctext'+i}}"
+                placeholder="Search Keyword" class="form-control inner-input" type="number" min="0"
+                (keyup)="applyFilter();" />
+              <p-dropdown *ngIf="tab.fieldType == 'select'" [options]="tab.values" placeholder="Select options"
+                [(ngModel)]="tab.selectedsearchtext" optionLabel="name" optionValue="_id" (onChange)="applyFilter();">
+              </p-dropdown>
+              <p-multiSelect *ngIf="tab.fieldType == 'multiselect'" [options]="tab.values" optionLabel="name"
+                optionValue="name" placeholder="Select" [(ngModel)]="tab.selectedsearchtext"
+                (onChange)="applyFilter();"></p-multiSelect>
+            </td>
+            <td class="col-lg-2 col-md-6 pr-0 pb-2">
+              <a class="add-icon" (click)="addFilter()"><i class="fa fa-plus" aria-hidden="true"></i></a>
+              <a class="delete-icon" (click)="deleteFilter(i)"><i class="fa fa-trash" aria-hidden="true"></i> </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+      </div>
+
+    </div>
+  </div>
+</div>

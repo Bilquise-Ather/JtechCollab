@@ -1,0 +1,29 @@
+ul {
+  width: 100%;
+  height: auto;
+  padding: 5px 0 0 0 ;
+  font-size: 14px;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+}
+
+li {
+  display: inline-block;
+  padding-right: 6px;
+  padding-left: 6px;
+}
+
+li.tag {
+  background-color: #0073e6;
+  color: #FFFFFF;
+  margin-right: 2px;
+  margin-top: 2px;
+}
+
+li.tag.nopadding {
+  color: #3985FC;
+  background-color: #FFFFFF;
+  padding: 0px;
+}
+

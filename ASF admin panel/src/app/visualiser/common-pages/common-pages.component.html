@@ -1,0 +1,15 @@
+<div class="main-page-content">
+  <div class="setting-menu-bar">
+    <ul class="menu-ul">
+      <li>
+        <a routerLink="/rooms/rooms" routerLinkActive="active" (click)="onClickLink(0)">Rooms</a>
+      </li>
+      <li>
+        <a routerLink="/rooms/path" routerLinkActive="active" (click)="onClickLink(1)">Images Path</a>
+      </li>
+    </ul>
+  </div>
+  <div class="settings-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

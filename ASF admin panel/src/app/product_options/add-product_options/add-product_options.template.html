@@ -1,0 +1,611 @@
+<div class="container-fluid management-tab">
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+  <div class="row section-box">
+    <div class="col-12">
+      {{ type | titlecase }} sub product
+      <div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <form #f="ngForm" novalidate autocomplete="off">
+            <!-- <button (click)="onClickAddNewColor()">test</button> -->
+            <div class="row">
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Product Name <span class="c-red">*</span></label>
+                  <p-dropdown name="mainproduct" #mainproduct="ngModel" [options]="main_product_list"
+                    placeholder="Select Product" [(ngModel)]="product.mainproduct" optionLabel="name" optionValue="_id">
+                  </p-dropdown>
+                  <div class="alert alert-danger"
+                    *ngIf="(mainproduct.touched || f.submitted) && (mainproduct.invalid || !product.mainproduct)">
+                    <p>Parent Product can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Sub Product Name <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="subproductname" placeholder="Enter Sub Product Name"
+                    name="subproductname" #subproductname="ngModel" [(ngModel)]="product.subproductname" required
+                    [class.is-invalid]="f.submitted && subproductname.invalid">
+                  <div class="alert alert-danger"
+                    *ngIf="(subproductname.touched || f.submitted) && subproductname.invalid">
+                    <p>Product Name can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Sub Product Slug <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="subproductslug" placeholder="Enter Sub Product Slug"
+                    name="subproductslug" #subproductslug="ngModel" [(ngModel)]="product.slug" required
+                    [class.is-invalid]="f.submitted && subproductname.invalid" (keyup)="generateSlug($event)">
+                  <div class="alert alert-danger"
+                    *ngIf="(subproductslug.touched || f.submitted) && subproductslug.invalid">
+                    <p>Product sulg can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="producttext">Sub Product text</label>
+                  <input type="text" class="form-control" id="text" placeholder="Enter Sub Product text" name="text"
+                    #text="ngModel" [(ngModel)]="product.text" >
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Packaging <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="packaging" placeholder="Enter Packaging" name="packaging"
+                    #packaging="ngModel" [(ngModel)]="product.packaging" [class.is-invalid]="f.submitted && packaging.invalid" required>
+                    <div class="alert alert-danger"
+                    *ngIf="(packaging.touched || f.submitted) && packaging.invalid">
+                    <p>Packaging can't be blank.</p>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Item No <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="itemno" placeholder="Enter item no" name="itemno"
+                    #itemno="ngModel" [(ngModel)]="product.itemno"  [class.is-invalid]="f.submitted && itemno.invalid" required>
+                    <div class="alert alert-danger"
+                    *ngIf="(itemno.touched || f.submitted) && itemno.invalid">
+                    <p>Item No. can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectionname">SEO Title <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="seotitle" placeholder="Enter SEO Title" name="seotitle"
+                    #seotitle="ngModel" [(ngModel)]="product.seotitle" required
+                    [class.is-invalid]="f.submitted && seotitle.invalid">
+                  <div class="alert alert-danger" *ngIf="(seotitle.touched || f.submitted) && seotitle.invalid">
+                    <p>SEO Title can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectionname">SEO Description <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="seodescription" placeholder="Enter SEO Description"
+                    name="seodescription" #seodescription="ngModel" [(ngModel)]="product.seodescription" required
+                    [class.is-invalid]="f.submitted && seodescription.invalid">
+                  <div class="alert alert-danger"
+                    *ngIf="(seodescription.touched || f.submitted) && seodescription.invalid">
+                    <p>SEO Description can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectiontext">SEO Keywords <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="seokeyword" placeholder="Enter Keywords" name="seokeyword"
+                    #seokeyword="ngModel" [(ngModel)]="product.seokeyword" required
+                    [class.is-invalid]="f.submitted && seokeyword.invalid">
+                  <div class="alert alert-danger" *ngIf="(seokeyword.touched || f.submitted) && seokeyword.invalid">
+                    <p>Keywords Text can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectiontext">Return to Collection Link</label>
+                  <input type="text" class="form-control" id="returntocollectionlink" placeholder="Enter Link" name="returntocollectionlink"
+                    #returntocollectionlink="ngModel" [(ngModel)]="product.returntocollectionlink">
+                </div>
+              </div>
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Image<span class="c-red">*</span></label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="product.productImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="product.productImageUrl" /></div>
+                      <div class="close-btn-wrapper" (click)="clearCLFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="product.image && !product.productImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="base_url+'/'+product.image" /></div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="productImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #productImageFile type="file" (change)="onCLUpload($event)" accept="image/*"
+                      style="display: none" required [class.is-invalid]="f.submitted && productImageFile.invalid" />
+                  </button>
+                  <div class="alert alert-danger"
+                    *ngIf="(type == 'add' && product.newImageUploaded == false && !product.productImageUrl) || (type == 'edit' && product.newImageUploaded == false && !product.productImageUrl)">
+                    <p>Product Image can't be blank.</p>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Visualiser Image<span class="c-red">*</span></label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="product.productVisualiserImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="product.productVisualiserImageUrl" /></div>
+                      <div class="close-btn-wrapper" (click)="clearVisualiserCLFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="product.visualiserimage && !product.productVisualiserImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="base_url+'/'+product.visualiserimage" /></div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="productVisualiserImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #productVisualiserImageFile type="file" (change)="onVisualiserCLUpload($event)" accept="image/*"
+                      style="display: none" required [class.is-invalid]="f.submitted && productVisualiserImageFile.invalid" />
+                  </button>
+                  <div class="alert alert-danger"
+                    *ngIf="(type == 'add' && product.newVisualiserImageUploaded == false && !product.productVisualiserImageUrl) || (type == 'edit' && product.newVisualiserImageUploaded == false && !product.productVisualiserImageUrl)">
+                    <p>Product Image can't be blank.</p>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 ">
+                <div class=" form-group">
+                  <div>
+                    <label>Optional Images <span class="c-red">*</span></label>
+                  </div>
+                  <div *ngFor='let url of already_uploadedurls;let i=index;'>
+                    <img *ngIf="!url.isdelete" [src]="base_url+'/'+url.image" height="200">
+                    <div *ngIf="!url.isdelete" class="close-btn-wrapper"
+                      (click)="clearAlreadyUploadedFile(url.baseimage)"><i class="fa fa-times-circle"
+                        aria-hidden="true"></i></div>
+                  </div>
+                  <div *ngFor='let url of urls;let i=index;'>
+                    <img *ngIf="!url.isdelete" [src]="url.url" height="200">
+                    <div *ngIf="!url.isdelete" class="close-btn-wrapper" (click)="clearOptionalFile(i)"><i
+                        class="fa fa-times-circle" aria-hidden="true"></i></div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="productoptionalImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #productoptionalImageFile type='file' (change)="onSelectFile($event)" multiple
+                      accept="image/*" [class.is-invalid]="f.submitted && productoptionalImageFile.invalid"
+                      style="display: none">
+                  </button>
+                  <div class="alert alert-danger"
+                    *ngIf="(type=='add' && f.submitted && already_uploadedurls.length <= 0 ) || (type=='edit' && f.submitted && urls.length==0 ) ">
+                    <p>Sub Product Image can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Select Size</label>
+                  <ng-select #pappc #size="ngModel" id="size" name="size" [items]="size_data" placeholder="Select size"
+                    bindLabel="name" bindValue="name" [searchable]="false" [clearable]="false" [multiple]="true"
+                    [(ngModel)]="product.selectedsize" appendTo="body">
+                    <ng-template ng-header-tmp>
+                      <div class="p-multiselect-header  ng-star-inserted" style="">
+                        <div class="p-multiselect-filter-container  ng-star-inserted">
+                          <input type="text" role="textbox" class="p-multiselect-filter p-inputtext p-component "
+                            (input)="pappc.filter($event.target.value)"><span
+                            class="p-multiselect-filter-icon pi pi-search "></span>
+                        </div>
+                        <button type="button" pripple="" class="p-multiselect-close p-link  p-ripple"><span
+                            class="p-multiselect-close-icon pi pi-times "
+                            (click)="pappc.handleClearClick();pappc.close();"></span></button>
+                      </div>
+                    </ng-template>
+                    <ng-template ng-footer-tmp>
+                      <div class="btn blue-btn" (click)="pappc.close();onClickAddNewSize();">
+                        <span class="dib mr-2"><i class="fas fa-plus"></i></span>
+                        <div class="dib">Add Size</div>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+
+                </div>
+              </div>
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Select Color </label>
+                  <ng-select #pcolor #color="ngModel" id="color" name="color" [items]="color_data"
+                    placeholder="Select color" bindLabel="name" bindValue="name" [searchable]="false"
+                    [clearable]="false" [multiple]="true" [(ngModel)]="product.selectedcolor" appendTo="body">
+                    <ng-template ng-header-tmp>
+                      <div class="p-multiselect-header  ng-star-inserted" style="">
+                        <div class="p-multiselect-filter-container  ng-star-inserted">
+                          <input type="text" role="textbox" class="p-multiselect-filter p-inputtext p-component "
+                            (input)="pcolor.filter($event.target.value)"><span
+                            class="p-multiselect-filter-icon pi pi-search "></span>
+                        </div>
+                        <button type="button" pripple="" class="p-multiselect-close p-link  p-ripple"><span
+                            class="p-multiselect-close-icon pi pi-times "
+                            (click)="pcolor.handleClearClick();pcolor.close();"></span></button>
+                      </div>
+                    </ng-template>
+                    <ng-template ng-footer-tmp>
+                      <div class="btn blue-btn" (click)="pcolor.close();onClickAddNewColor();">
+                        <span class="dib mr-2"><i class="fas fa-plus"></i></span>
+                        <div class="dib">Add Color</div>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Select Material</label>
+                  <ng-select #pmaterial #material="ngModel" id="material" name="material" [items]="material_data"
+                    placeholder="Select material" bindLabel="name" bindValue="name" [searchable]="false"
+                    [clearable]="false" [multiple]="true" [(ngModel)]="product.selectedmaterial" appendTo="body">
+                    <ng-template ng-header-tmp>
+                      <div class="p-multiselect-header  ng-star-inserted" style="">
+                        <div class="p-multiselect-filter-container  ng-star-inserted">
+                          <input type="text" role="textbox" class="p-multiselect-filter p-inputtext p-component "
+                            (input)="pmaterial.filter($event.target.value)"><span
+                            class="p-multiselect-filter-icon pi pi-search "></span>
+                        </div>
+                        <button type="button" pripple="" class="p-multiselect-close p-link  p-ripple"><span
+                            class="p-multiselect-close-icon pi pi-times "
+                            (click)="pmaterial.handleClearClick();pmaterial.close();"></span></button>
+                      </div>
+                    </ng-template>
+                    <ng-template ng-footer-tmp>
+                      <div class="btn blue-btn" (click)="pmaterial.close();onClickAddNewMaterial();">
+                        <span class="dib mr-2"><i class="fas fa-plus"></i></span>
+                        <div class="dib">Add material</div>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Select Thickness</label>
+                  <ng-select #pthickness #thickness="ngModel" id="thickness" name="thickness" [items]="thickness_data"
+                    placeholder="Select size" bindLabel="name" bindValue="name" [searchable]="false" [clearable]="false"
+                    [multiple]="true" [(ngModel)]="product.selectedthickness" appendTo="body">
+                    <ng-template ng-header-tmp>
+                      <div class="p-multiselect-header  ng-star-inserted" style="">
+                        <div class="p-multiselect-filter-container  ng-star-inserted">
+                          <input type="text" role="textbox" class="p-multiselect-filter p-inputtext p-component "
+                            (input)="pthickness.filter($event.target.value)"><span
+                            class="p-multiselect-filter-icon pi pi-search "></span>
+                        </div>
+                        <button type="button" pripple="" class="p-multiselect-close p-link  p-ripple"><span
+                            class="p-multiselect-close-icon pi pi-times "
+                            (click)="pthickness.handleClearClick();pthickness.close();"></span></button>
+                      </div>
+                    </ng-template>
+                    <ng-template ng-footer-tmp>
+                      <div class="btn blue-btn" (click)="pthickness.close();onClickAddNewThickness();">
+                        <span class="dib mr-2"><i class="fas fa-plus"></i></span>
+                        <div class="dib">Add thickness</div>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Select Length</label>
+                  <ng-select #pslength #slength="ngModel" id="slength" name="slength" [items]="length_data"
+                    placeholder="Select length" bindLabel="name" bindValue="name" [searchable]="false"
+                    [clearable]="false" [multiple]="true" [(ngModel)]="product.selectedlength" appendTo="body">
+                    <ng-template ng-header-tmp>
+                      <div class="p-multiselect-header  ng-star-inserted" style="">
+                        <div class="p-multiselect-filter-container  ng-star-inserted">
+                          <input type="text" role="textbox" class="p-multiselect-filter p-inputtext p-component "
+                            (input)="pslength.filter($event.target.value)"><span
+                            class="p-multiselect-filter-icon pi pi-search "></span>
+                        </div>
+                        <button type="button" pripple="" class="p-multiselect-close p-link  p-ripple"><span
+                            class="p-multiselect-close-icon pi pi-times "
+                            (click)="pslength.handleClearClick();pslength.close();"></span></button>
+                      </div>
+                    </ng-template>
+                    <ng-template ng-footer-tmp>
+                      <div class="btn blue-btn" (click)="pslength.close();onClickAddNewLength();">
+                        <span class="dib mr-2"><i class="fas fa-plus"></i></span>
+                        <div class="dib">Add length</div>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Select Wear Layer</label>
+                  <ng-select #pwearlayer #wearlayer="ngModel" id="wearlayer" name="wearlayer" [items]="wear_layer_data"
+                    placeholder="Select wearlayer" bindLabel="name" bindValue="name" [searchable]="false"
+                    [clearable]="false" [multiple]="true" [(ngModel)]="product.selectedwearlayer" appendTo="body">
+                    <ng-template ng-header-tmp>
+                      <div class="p-multiselect-header  ng-star-inserted" style="">
+                        <div class="p-multiselect-filter-container  ng-star-inserted">
+                          <input type="text" role="textbox" class="p-multiselect-filter p-inputtext p-component "
+                            (input)="pwearlayer.filter($event.target.value)"><span
+                            class="p-multiselect-filter-icon pi pi-search "></span>
+                        </div>
+                        <button type="button" pripple="" class="p-multiselect-close p-link  p-ripple"><span
+                            class="p-multiselect-close-icon pi pi-times "
+                            (click)="pwearlayer.handleClearClick();pwearlayer.close();"></span></button>
+                      </div>
+                    </ng-template>
+                    <ng-template ng-footer-tmp>
+                      <div class="btn blue-btn" (click)="pwearlayer.close();onClickAddNewWearLayer();">
+                        <span class="dib mr-2"><i class="fas fa-plus"></i></span>
+                        <div class="dib">Add wearlayer</div>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Select Pad </label>
+                  <ng-select #ppad #pad="ngModel" id="pad" name="pad" [items]="pad_data" placeholder="Select pad"
+                    bindLabel="name" bindValue="name" [searchable]="false" [clearable]="false" [multiple]="true"
+                    [(ngModel)]="product.selectedpad" appendTo="body">
+                    <ng-template ng-header-tmp>
+                      <div class="p-multiselect-header  ng-star-inserted" style="">
+                        <div class="p-multiselect-filter-container  ng-star-inserted">
+                          <input type="text" role="textbox" class="p-multiselect-filter p-inputtext p-component "
+                            (input)="ppad.filter($event.target.value)"><span
+                            class="p-multiselect-filter-icon pi pi-search "></span>
+                        </div>
+                        <button type="button" pripple="" class="p-multiselect-close p-link  p-ripple"><span
+                            class="p-multiselect-close-icon pi pi-times "
+                            (click)="ppad.handleClearClick();ppad.close();"></span></button>
+                      </div>
+                    </ng-template>
+                    <ng-template ng-footer-tmp>
+                      <div class="btn blue-btn" (click)="ppad.close();onClickAddNewPad();">
+                        <span class="dib mr-2"><i class="fas fa-plus"></i></span>
+                        <div class="dib">Add pad</div>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Select Core</label>
+                  <ng-select #pcore #core="ngModel" id="core" name="core" [items]="core_data" placeholder="Select core"
+                    bindLabel="name" bindValue="name" [searchable]="false" [clearable]="false" [multiple]="true"
+                    [(ngModel)]="product.selectedcore" appendTo="body">
+                    <ng-template ng-header-tmp>
+                      <div class="p-multiselect-header  ng-star-inserted">
+                        <div class="p-multiselect-filter-container  ng-star-inserted">
+                          <input type="text" role="textbox" class="p-multiselect-filter p-inputtext p-component "
+                            (input)="pcore.filter($event.target.value)"><span
+                            class="p-multiselect-filter-icon pi pi-search "></span>
+                        </div>
+                        <button type="button" pripple="" class="p-multiselect-close p-link  p-ripple"><span
+                            class="p-multiselect-close-icon pi pi-times "
+                            (click)="pcore.handleClearClick();pcore.close();"></span></button>
+                      </div>
+                    </ng-template>
+                    <ng-template ng-footer-tmp>
+                      <div class="btn blue-btn" (click)="pcore.close();onClickAddNewCore();">
+                        <span class="dib mr-2"><i class="fas fa-plus"></i></span>
+                        <div class="dib">Add core</div>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Select Installation</label>
+                  <ng-select #pinstallation #installation="ngModel" id="installation" name="installation"
+                    [items]="installatin_data" placeholder="Select Installation" bindLabel="name" bindValue="name"
+                    [searchable]="false" [clearable]="true" [multiple]="false" [(ngModel)]="product.installation"
+                    appendTo="body">
+                    <ng-template ng-header-tmp>
+                      <div class="p-multiselect-header  ng-star-inserted">
+                        <div class="p-multiselect-filter-container  ng-star-inserted">
+                          <input type="text" role="textbox" class="p-multiselect-filter p-inputtext p-component "
+                            (input)="pinstallation.filter($event.target.value)"><span
+                            class="p-multiselect-filter-icon pi pi-search "></span>
+                        </div>
+                        <button type="button" pripple="" class="p-multiselect-close p-link  p-ripple"><span
+                            class="p-multiselect-close-icon pi pi-times "
+                            (click)="pinstallation.handleClearClick();pinstallation.close();"></span></button>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <div>
+                    <label>Installation File</label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="product.installationFileUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><a target="_blank" [href]="product.installationFileUrl">{{product.installationFile.name}}</a></div>
+                      <div class="close-btn-wrapper" (click)="clearInstallationFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="product.installationimage && !product.installationFileUrl && !this.product.deleteInstallationFile">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><a  [href]="base_url+'/'+product.installationimage">{{product.installationimagename ? product.installationimagename : "File"}}</a>
+                        <div class="close-btn-wrapper" (click)="deleteInstallationFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="installationFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #installationFile type="file" (change)="onInstallationUpload($event)" accept=".pdf, .xml, .docx"
+                      style="display: none" required [class.is-invalid]="f.submitted && installationFile.invalid" />
+                  </button>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <div>
+                    <label>Warranty File</label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="product.warrantyFileUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><a target="_blank" [href]="product.warrantyFileUrl">{{product.warrantyFile.name}}</a></div>
+                      <div class="close-btn-wrapper" (click)="clearWarrantyFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="product.warrantyimage && !product.warrantyFileUrl && !this.product.deleteWarrantyFile">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><a  [href]="base_url+'/'+product.warrantyimage">{{product.warrantyimagename ? product.warrantyimagename : "File"}}</a>
+                        <div class="close-btn-wrapper" (click)="deleteWarrantyFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="warrantyFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #warrantyFile type="file" (change)="onWarrantyUpload($event)" accept=".pdf, .xml, .docx"
+                      style="display: none" required [class.is-invalid]="f.submitted && warrantyFile.invalid" />
+                  </button>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <div>
+                    <label>Maintenance File</label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="product.maintenanceFileUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><a target="_blank" [href]="product.maintenanceFileUrl">{{product.maintenanceFile.name}}</a></div>
+                      <div class="close-btn-wrapper" (click)="clearMaintenanceFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="product.maintenanaceimage && !product.maintenanceFileUrl && !this.product.deleteMaintenanceFile">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><a  [href]="base_url+'/'+product.maintenanaceimage">{{product.maintenanaceimagename ? product.maintenanaceimagename : "File"}}</a>
+                        <div class="close-btn-wrapper" (click)="deleteMaintenancenFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="maintenanceFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #maintenanceFile type="file" (change)="onMaintenanceUpload($event)" accept=".pdf, .xml, .docx"
+                      style="display: none" required [class.is-invalid]="f.submitted && maintenanceFile.invalid" />
+                  </button>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectionname">Warranty</label>
+                  <input type="text" class="form-control" id="warranty" placeholder="Enter Warranty" name="warranty"
+                    #warranty="ngModel" [(ngModel)]="product.warranty">
+                </div>
+              </div>
+
+
+
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectionname">Maintenance</label>
+                  <input type="text" class="form-control" id="maintenanace" placeholder="Enter Maintenance"
+                    name="maintenanace" #maintenanace="ngModel" [(ngModel)]="product.maintenanace">
+                </div>
+              </div>
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectionname">Embossed-In-Register</label>
+                  <input type="text" class="form-control" id="embossedinregister"
+                    placeholder="Enter Embossed-In-Register" name="embossedinregister" #embossedinregister="ngModel"
+                    [(ngModel)]="product.embossedinregister">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="col-12">
+                <button *ngIf="!product._id"
+                  [disabled]="f.invalid || !product.mainproduct || !product.subproductname || !product.slug ||  !product.packaging || !product.itemno || !product.seotitle || !product.seodescription || !product.seokeyword || !product.productImageFile || urls.length == 0"
+                  type="submit" class="btn green-btn" (click)="onClickSave()">Save Product</button>
+                <button *ngIf="product._id"
+                  [disabled]="f.invalid || !product.mainproduct || !product.subproductname || !product.slug ||  !product.packaging || !product.itemno || !product.seotitle || !product.seodescription || !product.seokeyword || !product.image"
+                  type="submit" class="btn green-btn" (click)="onClickSave()">Update Product</button>
+                <button type="button" class="btn gray-btn ml-4" (click)="onClickCancel()">Cancel</button>
+              </div>
+            </div>
+          </form>
+          <div>
+          </div>
+
+
+
+
+          <app-footer></app-footer>
+        </div>
+        <!-- End of Footer -->

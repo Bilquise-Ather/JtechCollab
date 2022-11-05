@@ -1,0 +1,482 @@
+<div class="container-fluid management-tab">
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+  <div class="row mb-2" style="justify-content: space-between;margin:0px;margin-bottom: 2rem;">
+    <h1 class="h3 page-title">About US</h1>
+  </div>
+
+  <div class="row" *ngIf="!editformdata && setting_Obj">
+    <div class="col-12">
+      <div class="c-table-wrapper table-responsive-small">
+        <div class="availabledata">
+          <table class="c-table">
+            <thead class="c-table-header">
+              <tr class="c-table-row c-table-row-header">
+                <div style="width: 5px;"></div>
+              </tr>
+            </thead>
+            <tbody class="c-table-body">
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Seo Title
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{setting_Obj.seotitle}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Seo Description
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{setting_Obj.seodescription}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Seo Keyword
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{setting_Obj.seokeyword}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Page Title
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{setting_Obj.pagetitle}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Subtitle
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{setting_Obj.subtitle}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Content
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{setting_Obj.content}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Banner Image
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">
+                  <!-- <img height="100" [src]="base_url +'/'+ this.setting_Obj.bannerimage" > -->
+                  <img height="100" [src]="base_url +'/'+ setting_Obj.bannerimage">
+                </td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Intro Section Title
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{setting_Obj.introtitle}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Intro Section Image
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">
+                  <!-- <img height="100" [src]="base_url +'/'+ this.setting_Obj.image2" > -->
+                  <img height="100" [src]="base_url +'/'+ setting_Obj.introimage">
+                </td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Intro Section Content
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.introcontent}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Counter 1 Icon Class
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.countericon1}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Counter 1 Title
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.countertitle1}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Counter 1 Number
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.counternumber1}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Counter 2 Icon Class
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.countericon2}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Counter 2 Title
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.countertitle2}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Counter 2 Number
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.counternumber2}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Counter 3 Icon Class
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.countericon3}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Counter 3 Title
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.countertitle3}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Counter 3 Number
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.counternumber3}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Counter 4 Icon Class
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.countericon4}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Counter 4 Title
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.countertitle4}}</td>
+              </tr>
+              <tr class="c-table-row">
+
+                <td class="c-table-cell c-table-body-cell text-pull-left">Counter 4 Number
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.counternumber4}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="footer-block  mb-2 mt-4">
+            <button type="submit" class="btn green-btn" (click)="editformdata=true">Edit</button>
+            <button type="button" class="btn gray-btn" *ngIf="editformdata">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-body custom-modal-body" *ngIf="editformdata">
+    <form #f="ngForm" novalidate autocomplete="off">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="collectionname">SEO Title <span class="c-red">*</span></label>
+            <input type="text" class="form-control" id="seotitle" placeholder="Enter SEO Title" name="seotitle"
+              #seotitle="ngModel" [(ngModel)]="setting_Obj.seotitle" required
+              [class.is-invalid]="f.submitted && seotitle.invalid">
+            <div class="alert alert-danger" *ngIf="(seotitle.touched || f.submitted) && seotitle.invalid">
+              <p>SEO Title can't be blank.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 ">
+          <div class="form-group">
+            <label for="collectionname">SEO Description <span class="c-red">*</span></label>
+            <input type="text" class="form-control" id="seodescription" placeholder="Enter SEO Description"
+              name="seodescription" #seodescription="ngModel" [(ngModel)]="setting_Obj.seodescription" required
+              [class.is-invalid]="f.submitted && seodescription.invalid">
+            <div class="alert alert-danger" *ngIf="(seodescription.touched || f.submitted) && seodescription.invalid">
+              <p>SEO Description can't be blank.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="collectiontext">SEO Keywords <span class="c-red">*</span></label>
+            <input type="text" class="form-control" id="seokeyword" placeholder="Enter Keywords" name="seokeyword"
+              #seokeyword="ngModel" [(ngModel)]="setting_Obj.seokeyword" required
+              [class.is-invalid]="f.submitted && seokeyword.invalid">
+            <div class="alert alert-danger" *ngIf="(seokeyword.touched || f.submitted) && seokeyword.invalid">
+              <p>Keywords Text can't be blank.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control" id="pagetitle" name="pagetitle" placeholder="Enter Page Title "
+              #pagetitle="ngModel" [(ngModel)]="this.setting_Obj.pagetitle" required />
+            <div class="alert alert-danger" *ngIf="pagetitle.touched && pagetitle.invalid">
+              <p>Page Title can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Sub Title</label>
+            <input type="text1" class="form-control" id="subtitle" name="subtitle" placeholder="Enter SubTitle"
+              #subtitle="ngModel" [(ngModel)]="this.setting_Obj.subtitle" required />
+            <div class="alert alert-danger" *ngIf="subtitle.touched && subtitle.invalid">
+              <p>Subtitle can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Content</label>
+            <input type="text" class="form-control" id="content" name="content" placeholder="Enter Content"
+              #content="ngModel" [(ngModel)]="this.setting_Obj.content" required />
+            <div class="alert alert-danger" *ngIf="content.touched && content.invalid">
+              <p>Content can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <div>
+              <label>Banner Image</label>
+            </div>
+
+            <div class="uploaded-file-block" *ngIf="setting_Obj.bannerimageUrl">
+              <div class="file-detail-wrap">
+                <div class="uimage"><img width="100px" [src]="setting_Obj.bannerimageUrl" /></div>
+                <div class="close-btn-wrapper" (click)="clearCLFile()"><i class="fa fa-times-circle"
+                    aria-hidden="true"></i></div>
+              </div>
+            </div>
+            <div class="uploaded-file-block" *ngIf="setting_Obj.bannerimage && !setting_Obj.bannerimageUrl">
+              <div class="file-detail-wrap">
+                <div class="uimage"><img width="100px" [src]="base_url+'/'+setting_Obj.bannerimage" /></div>
+
+              </div>
+            </div>
+            <button type="button" class="btn dark-blue-btn" (click)="bannerimageFile.click()">
+              <div>
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Upload
+              </div>
+              <input #bannerimageFile type="file" (change)="onCLUpload($event)" accept="image/*"
+                style="display: none" />
+            </button>
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Intro Title</label>
+            <input type="text" class="form-control" id="introtitle" name="introtitle" placeholder="Enter Intro Title"
+              #introtitle="ngModel" [(ngModel)]="setting_Obj.introtitle" required />
+            <div class="alert alert-danger" *ngIf="introtitle.touched && introtitle.invalid">
+              <p>Intro Title can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <div>
+              <label>Intro Image</label>
+            </div>
+
+            <div class="uploaded-file-block" *ngIf="setting_Obj.introimageUrl">
+              <div class="file-detail-wrap">
+                <div class="uimage"><img width="100px" [src]="setting_Obj.introimageUrl" /></div>
+                <div class="close-btn-wrapper" (click)="clearCLFileIntro()"><i class="fa fa-times-circle"
+                    aria-hidden="true"></i></div>
+              </div>
+            </div>
+            <div class="uploaded-file-block" *ngIf="setting_Obj.introimage && !setting_Obj.introimageUrl">
+              <div class="file-detail-wrap">
+                <div class="uimage"><img width="100px" [src]="base_url+'/'+setting_Obj.introimage" /></div>
+
+              </div>
+            </div>
+            <button type="button" class="btn dark-blue-btn" (click)="introimageFile.click()">
+              <div>
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Upload
+              </div>
+              <input #introimageFile type="file" (change)="onCLUploadIntro($event)" accept="image/*"
+                style="display: none" />
+            </button>
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Intro Content</label>
+            <input type="text" class="form-control" id="introcontent" name="introcontent"
+              placeholder="Enter introcontent" #introcontent="ngModel" [(ngModel)]="this.setting_Obj.introcontent"
+              required />
+            <div class="alert alert-danger" *ngIf="introcontent.touched && introcontent.invalid">
+              <p>Intro Content can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- icon 1 -->
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Counter 1 Icon Class</label>
+            <input type="text" class="form-control" id="countericon1" name="countericon1"
+              placeholder="Enter Counter 1 Icon Class" #countericon1="ngModel"
+              [(ngModel)]="this.setting_Obj.countericon1" required />
+            <div class="alert alert-danger" *ngIf="countericon1.touched && countericon1.invalid">
+              <p>Counter 1 Icon Class can't be blank.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Counter 1 Icon Title</label>
+            <input type="text" class="form-control" id="countertitle1" name="countertitle1"
+              placeholder="Enter Counter 1 Icon Title" #countertitle1="ngModel"
+              [(ngModel)]="this.setting_Obj.countertitle1" required />
+            <div class="alert alert-danger" *ngIf="countertitle1.touched && countertitle1.invalid">
+              <p>Counter 1 Icon Title can't be blank.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Counter 1 Icon Number</label>
+            <input type="text" class="form-control" id="counternumber1" name="counternumber1"
+              placeholder="Enter Counter 1 Icon Number" #counternumber1="ngModel"
+              [(ngModel)]="this.setting_Obj.counternumber1" required />
+            <div class="alert alert-danger" *ngIf="counternumber1.touched && counternumber1.invalid">
+              <p>Counter 1 Icon Number can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- icon 2 -->
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Counter 2 Icon Class</label>
+            <input type="text" class="form-control" id="countericon2" name="countericon2"
+              placeholder="Enter Counter 2 Icon Class" #countericon2="ngModel"
+              [(ngModel)]="this.setting_Obj.countericon2" required />
+            <div class="alert alert-danger" *ngIf="countericon2.touched && countericon2.invalid">
+              <p>Counter 2 Icon Class can't be blank.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Counter 2 Icon Title</label>
+            <input type="text" class="form-control" id="countertitle2" name="countertitle2"
+              placeholder="Enter Counter 2 Icon Title" #countertitle2="ngModel"
+              [(ngModel)]="this.setting_Obj.countertitle2" required />
+            <div class="alert alert-danger" *ngIf="countertitle2.touched && countertitle2.invalid">
+              <p>Counter 2 Icon Title can't be blank.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Counter 2 Icon Number</label>
+            <input type="text" class="form-control" id="counternumber2" name="counternumber2"
+              placeholder="Enter Counter 2 Icon Number" #counternumber2="ngModel"
+              [(ngModel)]="this.setting_Obj.counternumber2" required />
+            <div class="alert alert-danger" *ngIf="counternumber2.touched && counternumber2.invalid">
+              <p>Counter 2 Icon Number can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- icon 3 -->
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Counter 3 Icon Class</label>
+            <input type="text" class="form-control" id="countericon3" name="countericon3"
+              placeholder="Enter Counter 3 Icon Class" #countericon3="ngModel"
+              [(ngModel)]="this.setting_Obj.countericon3" required />
+            <div class="alert alert-danger" *ngIf="countericon3.touched && countericon3.invalid">
+              <p>Counter 3 Icon Class can't be blank.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Counter 3 Icon Title</label>
+            <input type="text" class="form-control" id="countertitle3" name="countertitle3"
+              placeholder="Enter Counter 3 Icon Title" #countertitle3="ngModel"
+              [(ngModel)]="this.setting_Obj.countertitle3" required />
+            <div class="alert alert-danger" *ngIf="countertitle3.touched && countertitle3.invalid">
+              <p>Counter 3 Icon Title can't be blank.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Counter 3 Icon Number</label>
+            <input type="text" class="form-control" id="counternumber3" name="counternumber3"
+              placeholder="Enter Counter 3 Icon Number" #counternumber3="ngModel"
+              [(ngModel)]="this.setting_Obj.counternumber3" required />
+            <div class="alert alert-danger" *ngIf="counternumber3.touched && counternumber3.invalid">
+              <p>Counter 3 Icon Number can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- icon 4-->
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Counter 4 Icon Class</label>
+            <input type="text" class="form-control" id="countericon4" name="countericon4"
+              placeholder="Enter Counter 4 Icon Class" #countericon4="ngModel"
+              [(ngModel)]="this.setting_Obj.countericon4" required />
+            <div class="alert alert-danger" *ngIf="countericon4.touched && countericon4.invalid">
+              <p>Counter 4 Icon Class can't be blank.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Counter 4 Icon Title</label>
+            <input type="text" class="form-control" id="countertitle4" name="countertitle4"
+              placeholder="Enter Counter 4 Icon Title" #countertitle4="ngModel"
+              [(ngModel)]="this.setting_Obj.countertitle4" required />
+            <div class="alert alert-danger" *ngIf="countertitle4.touched && countertitle4.invalid">
+              <p>Counter 4 Icon Title can't be blank.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Counter 4 Icon Number</label>
+            <input type="text" class="form-control" id="counternumber4" name="counternumber4"
+              placeholder="Enter Counter 4 Icon Number" #counternumber4="ngModel"
+              [(ngModel)]="this.setting_Obj.counternumber4" required />
+            <div class="alert alert-danger" *ngIf="counternumber4.touched && counternumber4.invalid">
+              <p>Counter 4 Icon Number can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <div class="footer-block  mb-2 mt-4">
+        <button type="submit" class="btn green-btn" (click)="addAboutUs()">Add</button>
+        <button type="button" class="btn gray-btn ml-4" (click)="editformdata=false">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+
+</div>
+
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- End of Footer -->

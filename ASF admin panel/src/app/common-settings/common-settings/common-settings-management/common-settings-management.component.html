@@ -1,0 +1,223 @@
+<div class="container-fluid management-tab">
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+
+  <div class="row" style="justify-content: space-between;margin:0px;margin-bottom: 2rem;">
+    <h1 class="h3 page-title">Common Settings</h1>
+  </div>
+  <div class="row" *ngIf="!editformdata && setting_Obj">
+    <div class="col-12">
+      <div class="c-table-wrapper table-responsive-small">
+        <div class="availabledata">
+          <table class="c-table">
+            <thead class="c-table-header">
+              <tr class="c-table-row c-table-row-header">
+                <div style="width: 5px;"></div>
+              </tr>
+            </thead>
+            <tbody class="c-table-body">
+              <tr class="c-table-row">
+                <div style="width: 5px;"></div>
+                <td class="c-table-cell c-table-body-cell text-pull-left">Logo
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">
+                  <img height="100" [src]="base_url +'/'+ this.setting_Obj.logo">
+                </td>
+              </tr>
+              <tr class="c-table-row">
+                <div style="width: 5px;"></div>
+                <td class="c-table-cell c-table-body-cell text-pull-left">Facebook
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.facebook}}</td>
+              </tr>
+              <tr class="c-table-row">
+                <div style="width: 5px;"></div>
+                <td class="c-table-cell c-table-body-cell text-pull-left">LinkedIn
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.linkedin}}</td>
+              </tr>
+              <tr class="c-table-row">
+                <div style="width: 5px;"></div>
+                <td class="c-table-cell c-table-body-cell text-pull-left">Instagram
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.instagram}}</td>
+              </tr>
+              <tr class="c-table-row">
+                <div style="width: 5px;"></div>
+                <td class="c-table-cell c-table-body-cell text-pull-left">Twitter
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.twitter}}</td>
+              </tr>
+              <tr class="c-table-row">
+                <div style="width: 5px;"></div>
+                <td class="c-table-cell c-table-body-cell text-pull-left">Call
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.call}}</td>
+              </tr>
+              <tr class="c-table-row">
+                <div style="width: 5px;"></div>
+                <td class="c-table-cell c-table-body-cell text-pull-left">Email
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.email}}</td>
+              </tr>
+              <tr class="c-table-row">
+                <div style="width: 5px;"></div>
+                <td class="c-table-cell c-table-body-cell text-pull-left">Address
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.address}}</td>
+              </tr>
+              <tr class="c-table-row">
+                <div style="width: 5px;"></div>
+                <td class="c-table-cell c-table-body-cell text-pull-left">Map
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">{{this.setting_Obj.map}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="footer-block  mb-2 mt-4">
+            <button type="submit" class="btn green-btn" (click)="editformdata=true">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-body custom-modal-body" *ngIf="editformdata">
+    <form #f="ngForm" novalidate autocomplete="off">
+      <div class="row">
+        <div class="col-12 ">
+          <div class="form-group">
+            <div>
+              <label>Logo</label>
+            </div>
+
+            <div class="uploaded-file-block" *ngIf="setting_Obj.logoUrl">
+              <div class="file-detail-wrap">
+                <div class="uimage"><img width="100px" [src]="setting_Obj.logoUrl" /></div>
+                <div class="close-btn-wrapper" (click)="clearCLFile()"><i class="fa fa-times-circle"
+                    aria-hidden="true"></i></div>
+              </div>
+            </div>
+            <div class="uploaded-file-block" *ngIf="setting_Obj.logo && !setting_Obj.logoUrl">
+              <div class="file-detail-wrap">
+                <div class="uimage"><img width="100px" [src]="base_url+'/'+setting_Obj.logo" /></div>
+
+              </div>
+            </div>
+            <button type="button" class="btn dark-blue-btn" (click)="logoFile.click()">
+              <div>
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Upload
+              </div>
+              <input #logoFile type="file" (change)="onCLUpload($event)" accept="image/*" style="display: none" />
+            </button>
+          </div>
+        </div>
+
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Facebook</label>
+            <input type="text" class="form-control" id="facebook" name="facebook" placeholder="Enter facebook link"
+              #facebook="ngModel" [(ngModel)]="this.setting_Obj.facebook" required />
+            <div class="alert alert-danger" *ngIf="facebook.touched && facebook.invalid">
+              <p>Text can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>LinkedIn</label>
+            <input type="text" class="form-control" id="linkedin" name="linkedin" placeholder="Enter linkedin link"
+              #linkedin="ngModel" [(ngModel)]="this.setting_Obj.linkedin" required />
+            <div class="alert alert-danger" *ngIf="linkedin.touched && linkedin.invalid">
+              <p>Text can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Instagram</label>
+            <input type="text" class="form-control" id="instagram" name="instagram" placeholder="Enter instagram link"
+              #instagram="ngModel" [(ngModel)]="this.setting_Obj.instagram" required />
+            <div class="alert alert-danger" *ngIf="instagram.touched && instagram.invalid">
+              <p>Text can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Twitter</label>
+            <input type="text" class="form-control" id="twitter" name="twitter" placeholder="Enter twitter link"
+              #twitter="ngModel" [(ngModel)]="this.setting_Obj.twitter" required />
+            <div class="alert alert-danger" *ngIf="twitter.touched && twitter.invalid">
+              <p>Text can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Call</label>
+            <input type="text" class="form-control" id="call" name="call" placeholder="Enter call link" #call="ngModel"
+              [(ngModel)]="this.setting_Obj.call" required />
+            <div class="alert alert-danger" *ngIf="call.touched && call.invalid">
+              <p>Text can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email link"
+              #email="ngModel" [(ngModel)]="this.setting_Obj.email" required />
+            <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+              <p>Text can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Address</label>
+            <input type="text" class="form-control" id="address" name="address" placeholder="Enter address link"
+              #address="ngModel" [(ngModel)]="this.setting_Obj.address" required />
+            <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
+              <p>Text can't be blank.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Map</label>
+            <input type="text" class="form-control" id="map" name="map" placeholder="Enter map link" #map="ngModel"
+              [(ngModel)]="this.setting_Obj.map" required />
+            <div class="alert alert-danger" *ngIf="map.touched && map.invalid">
+              <p>Text can't be blank.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4 mb-4">
+        <div class="col-12">
+          <button type="submit" class="btn green-btn" (click)="updateCommonSettings()">Update</button>
+          <button type="button" class="btn gray-btn ml-4" (click)="editformdata=false">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+</div>
+
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- End of Footer -->

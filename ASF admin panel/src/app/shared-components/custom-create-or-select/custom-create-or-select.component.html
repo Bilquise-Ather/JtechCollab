@@ -1,0 +1,28 @@
+<div class="{{type}}" id="dropdown_parent_id" (click)="onPageClick($event);">
+  <label class="input__label" *ngIf="label">{{label}}</label>
+  <div style="position: relative;" class="multi-select-dropdown-main-wrapper">
+    <input type="text" class="form-control input-readonly-div" id="input_text"
+      style="cursor: pointer;-webkit-user-select: none; " [(ngModel)]="filter_text" disabled="{{disabled}}"
+      name="{{name}}" placeholder="{{placeholder}}" (click)="onClickDropDownInput(!showDropDown)"
+      (keyup)="applyFilter()"
+      [ngClass]="{ 'is-invalid': isSubmitted && isRequired && (!value_list || value_list[0][optionValue] == null)}" />
+    <div class="alert alert-danger"
+      *ngIf="isSubmitted && isRequired && (!value_list || value_list[0][optionValue] == null)">
+      <p>Select at least one or create new</p>
+    </div>
+    <div class="un-select-list" id="drop_down_wrapper">
+      <ul>
+        <li class="option_item" *ngFor="let option of temp_option_list; let p=index "
+          (click)="onChangeSelection(option, p); sendData();" [class.active]="validate(option)">
+          <label class="checkbox-label">{{option[optionValue]}}</label>
+        </li>
+      </ul>
+    </div>
+    <div class="value-list-wrapper" *ngIf="value_list.length > 0 && value_list[0][optionValue] != null">
+      <ng-template ngFor [ngForOf]="value_list" let-value_l let-i="index">
+        <span class="selected-item">{{value_l[optionValue]}}<i class="fa fa-times" (click)="removeSelection(value_l)"
+            aria-hidden="true"></i></span>
+      </ng-template>
+    </div>
+  </div>
+</div><!-- select input -->

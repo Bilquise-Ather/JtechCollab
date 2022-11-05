@@ -1,0 +1,9 @@
+<input id="tagInput" type="text" [(ngModel)]="current" (blur)="blur()" (keyup.enter)="blur()"
+  [ngClass]="{ 'form-control': true,'is-invalid': isSubmitted && isRequired && (!tags || tags.length==0)}" />
+<ul>
+  <li class="tag" *ngFor="let item of tags">{{item}} <span style="cursor: pointer;" (click)="remove(item);"> x</span>
+  </li>
+  <div class="alert alert-danger" *ngIf="isSubmitted && isRequired && (!tags || tags.length==0)">
+    <p>Select at least one</p>
+  </div>
+</ul>

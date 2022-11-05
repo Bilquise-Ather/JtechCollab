@@ -1,0 +1,83 @@
+<div class="container-fluid management-tab">
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+  <div class="row section-box">
+    <div class="col-12">
+      {{ type | titlecase }} Resource Options
+      <div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <form #f="ngForm" novalidate autocomplete="off">
+            <div class="row">
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="productname">Resource Name <span class="c-red">*</span></label>
+                  <p-dropdown name="resourcename" #resourcename="ngModel" [options]="main_product_list"
+                    placeholder="Select Resource" [(ngModel)]="resource_Options.resourcename" optionLabel="resourcename"
+                    optionValue="_id">
+                  </p-dropdown>
+                  <div class="alert alert-danger"
+                    *ngIf="(resourcename.touched || f.submitted) && (resourcename.invalid || !resource_Options.resourcename)">
+                    <p>Resource name can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>PDF</label>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="resource_Options.pdfUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage">
+                        {{resource_Options.pdfFile.name}}
+                      </div>
+                      <div class="close-btn-wrapper" (click)="clearCLFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="resource_Options.pdfactualname && !resource_Options.pdfUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage">{{resource_Options.pdfactualname}}</div>
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="pdfFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #pdfFile type="file" (change)="onCLUpload($event)" accept="application/pdf"
+                      style="display: none" />
+                  </button>
+                </div>
+              </div>
+              <div class="col-12 ">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title"
+                    #title="ngModel" [(ngModel)]="resource_Options.title" required />
+                  <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+                    <p>Text can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="col-12">
+                <button *ngIf="!resource_Options._id"
+                  [disabled]="f.invalid || !resource_Options.pdfFile || !resource_Options.title" type="submit"
+                  class="btn green-btn" (click)="onClickSave()">Add</button>
+                <button *ngIf="resource_Options._id"
+                  [disabled]="f.invalid || !resource_Options.pdfactualname || !resource_Options.title" type="submit"
+                  class="btn green-btn" (click)="onClickSave()">Update</button>
+                <button type="button" class="btn gray-btn ml-4" (click)="onClickCancel()">Cancel</button>
+              </div>
+            </div>
+          </form>
+          <div>
+          </div>
+          <app-footer></app-footer>
+        </div>
+        <!-- End of Footer -->

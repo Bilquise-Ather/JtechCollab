@@ -1,0 +1,357 @@
+<ngx-loading [show]="loading"
+  [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+</ngx-loading>
+
+<div class="modal-header custom-modal-header">
+  <div style="font-size: 20px;">
+    {{dialogType == 'update' ? 'Update Category' : 'Add Category'}}
+  </div>
+  <div class="modal-header-close-btn" (click)="onClose()">
+    x
+  </div>
+</div>
+
+<div class="modal-body custom-modal-body">
+  <form #f="ngForm" novalidate autocomplete="off" *ngIf="slider_obj">
+    <div class="row">
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Image <span class="c-red">*</span></label>
+          </div>
+
+          <div class="uploaded-file-block" *ngIf="slider_obj.sliderImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="slider_obj.sliderImageUrl" /></div>
+              <div class="close-btn-wrapper" (click)="clearCLFile()"><i class="fa fa-times-circle"
+                  aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <div class="uploaded-file-block" *ngIf="slider_obj.category_image && !slider_obj.sliderImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="base_url+'/'+slider_obj.category_image" /></div>
+
+            </div>
+          </div>
+          <button type="button" class="btn dark-blue-btn" (click)="sliderImageFile.click()">
+            <div>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Upload
+            </div>
+            <input #sliderImageFile type="file" (change)="onCLUpload($event)" accept="image/*" style="display: none" />
+          </button>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Award Image <span class="c-red">*</span></label>
+          </div>
+
+          <div class="uploaded-file-block" *ngIf="slider_obj.sliderAwardImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="slider_obj.sliderAwardImageUrl" /></div>
+              <div class="close-btn-wrapper" (click)="clearCLAwardFile()"><i class="fa fa-times-circle"
+                  aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <div class="uploaded-file-block" *ngIf="slider_obj.award_image && !slider_obj.sliderAwardImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="base_url+'/'+slider_obj.award_image" /></div>
+              <div class="close-btn-wrapper" (click)="clearAwardImageFileFull()"><i class="fa fa-times-circle"
+                aria-hidden="true"></i></div>
+
+            </div>
+          </div>
+          <button type="button" class="btn dark-blue-btn" (click)="sliderAwardImageFile.click()">
+            <div>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Upload
+            </div>
+            <input #sliderAwardImageFile type="file" (change)="onCLAwardUpload($event)" accept="image/*"
+              style="display: none" />
+          </button>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Small Icon <span class="c-red">*</span></label>
+          </div>
+
+          <div class="uploaded-file-block" *ngIf="slider_obj.sliderSmallIconImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="slider_obj.sliderSmallIconImageUrl" /></div>
+              <div class="close-btn-wrapper" (click)="clearCLSmallIconFile()"><i class="fa fa-times-circle"
+                  aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <div class="uploaded-file-block" *ngIf="slider_obj.smallicon_image && !slider_obj.sliderSmallIconImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="base_url+'/'+slider_obj.smallicon_image" /></div>
+              <div class="close-btn-wrapper" (click)="clearSmallImageFileFull()"><i class="fa fa-times-circle"
+                aria-hidden="true"></i></div>
+
+            </div>
+          </div>
+          <button type="button" class="btn dark-blue-btn" (click)="sliderSmallIconImageFile.click()">
+            <div>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Upload
+            </div>
+            <input #sliderSmallIconImageFile type="file" (change)="onCLSmallIconUpload($event)" accept="image/*"
+              style="display: none" />
+          </button>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Banner Image <span class="c-red">*</span></label>
+          </div>
+
+          <div class="uploaded-file-block" *ngIf="slider_obj.sliderBannerImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="slider_obj.sliderBannerImageUrl" /></div>
+              <div class="close-btn-wrapper" (click)="clearCLBannerFile()"><i class="fa fa-times-circle"
+                  aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <div class="uploaded-file-block" *ngIf="slider_obj.banner_image && !slider_obj.sliderBannerImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="base_url+'/'+slider_obj.banner_image" /></div>
+              <div class="close-btn-wrapper" (click)="clearBannerImageFileFull()"><i class="fa fa-times-circle"
+                aria-hidden="true"></i></div>
+
+            </div>
+          </div>
+          <button type="button" class="btn dark-blue-btn" (click)="sliderBannerImageFile.click()">
+            <div>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Upload
+            </div>
+            <input #sliderBannerImageFile type="file" (change)="onCLBannerUpload($event)" accept="image/*"
+              style="display: none" />
+          </button>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Display Order</label>
+          <input type="number" class="form-control" id="displayorder" name="displayorder" placeholder="Enter Display Order" #displayorder="ngModel"
+            [(ngModel)]="slider_obj.displayorder" />
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Name <span class="c-red">*</span></label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" #name="ngModel"
+            [(ngModel)]="slider_obj.name" required />
+          <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+            <p>Text can't be blank.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Slug <span class="c-red">*</span></label>
+          <input type="text" class="form-control" id="slug" name="slug" placeholder="Enter Slug" #slug="ngModel"
+            [(ngModel)]="slider_obj.slug" (keyup)="generateSlug($event)" required />
+          <div class="alert alert-danger" *ngIf="slug.touched && slug.invalid">
+            <p>Slug can't be blank.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Link</label>
+          <input type="text" class="form-control" id="link" name="link" placeholder="Enter Link" #link="ngModel"
+            [(ngModel)]="slider_obj.link"  />
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Optional Images</label>
+          </div>
+          <div *ngFor='let url of already_uploadedurls;let i=index;'>
+            <img *ngIf="!url.isdelete" [src]="base_url+'/'+url.image" height="200">
+            <div *ngIf="!url.isdelete" class="close-btn-wrapper"
+              (click)="clearAlreadyUploadedFile(url.baseimage)"><i class="fa fa-times-circle"
+                aria-hidden="true"></i></div>
+          </div>
+          <div *ngFor='let url of urls;let i=index;'>
+            <img *ngIf="!url.isdelete" [src]="url.url" height="200">
+            <div *ngIf="!url.isdelete" class="close-btn-wrapper" (click)="clearOptionalFile(i)"><i
+                class="fa fa-times-circle" aria-hidden="true"></i></div>
+          </div>
+          <button type="button" class="btn dark-blue-btn" (click)="productoptionalImageFile.click()">
+            <div>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Upload
+            </div>
+            <input #productoptionalImageFile type='file' (change)="onSelectFile($event)" multiple
+              accept="image/*" [class.is-invalid]="f.submitted && productoptionalImageFile.invalid"
+              style="display: none">
+          </button>
+          <div class="alert alert-danger"
+            *ngIf="(type=='add' && f.submitted && already_uploadedurls.length <= 0 ) || (type=='edit' && f.submitted && urls.length==0 ) ">
+            <p>Sub Product Image can't be blank.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Big Text <span class="c-red">*</span></label>
+          <div [class.is-invalid]="f.submitted && (bigtext.invalid || !slider_obj.bigtext)">
+            <div [ngxSummernote]="config" name="bigtext" #bigtext="ngModel" [(ngModel)]="slider_obj.bigtext"></div>
+          </div>
+          <div class="alert alert-danger" *ngIf="bigtext.touched && bigtext.invalid">
+            <p>Big Text can't be blank.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="productname">Top Related Projects <span class="c-red">*</span></label>
+          <p-multiSelect #relatedprojects="ngModel" id="relatedprojects" name="relatedprojects" [options]="all_projects_list"
+      optionValue="_id" optionLabel="name" placeholder="Select Realted Projects"
+      defaultLabel="Select Related Projets" [(ngModel)]="slider_obj.toprelatedprojects"
+      [ngModelOptions]="{standalone: true}"></p-multiSelect>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="form-group">
+          <label for="productname">Bottom Related Projects <span class="c-red">*</span></label>
+          <p-multiSelect #bottomrelatedprojects="ngModel" id="bottomrelatedprojects" name="bottomrelatedprojects" [options]="all_projects_list"
+      optionValue="_id" optionLabel="name" placeholder="Select Realted Projects"
+      defaultLabel="Select Related Projets" [(ngModel)]="slider_obj.bottomrelatedprojects"
+      [ngModelOptions]="{standalone: true}"></p-multiSelect>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Video</label>
+          <input type="text" class="form-control" id="video" name="video" placeholder="Enter video link"
+            #video="ngModel" [(ngModel)]="slider_obj.video" />
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label for="collectionname">SEO Title <span class="c-red">*</span></label>
+          <input type="text" class="form-control" id="seotitle" placeholder="Enter SEO Title" name="seotitle"
+            #seotitle="ngModel" [(ngModel)]="slider_obj.seotitle" required
+            [class.is-invalid]="f.submitted && seotitle.invalid">
+          <div class="alert alert-danger" *ngIf="(seotitle.touched || f.submitted) && seotitle.invalid">
+            <p>SEO Title can't be blank.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="collectionname">SEO Description <span class="c-red">*</span></label>
+          <input type="text" class="form-control" id="seodescription" placeholder="Enter SEO Description"
+            name="seodescription" #seodescription="ngModel" [(ngModel)]="slider_obj.seodescription" required
+            [class.is-invalid]="f.submitted && seodescription.invalid">
+          <div class="alert alert-danger"
+            *ngIf="(seodescription.touched || f.submitted) && seodescription.invalid">
+            <p>SEO Description can't be blank.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label for="collectiontext">SEO Keywords</label>
+          <input type="text" class="form-control" id="seokeyword" placeholder="Enter Keywords" name="seokeyword"
+            #seokeyword="ngModel" [(ngModel)]="slider_obj.seokeyword"
+            >
+
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Video Alternate Image</label>
+          </div>
+
+          <div class="uploaded-file-block" *ngIf="slider_obj.sliderVideoImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="slider_obj.sliderVideoImageUrl" /></div>
+              <div class="close-btn-wrapper" (click)="clearVideoImageFile()"><i class="fa fa-times-circle"
+                  aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <div class="uploaded-file-block" *ngIf="slider_obj.video_image && !slider_obj.sliderVideoImageUrl">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" [src]="base_url+'/'+slider_obj.video_image" /></div>
+              <div class="close-btn-wrapper" (click)="clearVideoImageFileFull()"><i class="fa fa-times-circle"
+                aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <button type="button" class="btn dark-blue-btn" (click)="sliderVideoImageFile.click()">
+            <div>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Upload
+            </div>
+            <input #sliderVideoImageFile type="file" (change)="onVideoImageUpload($event)" accept="image/*"
+              style="display: none" />
+          </button>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Small Text <span class="c-red">*</span></label>
+          <div [class.is-invalid]="f.submitted && (smalltext.invalid || !slider_obj.smalltext)">
+            <div [ngxSummernote]="config" name="smalltext" #smalltext="ngModel" [(ngModel)]="slider_obj.smalltext">
+            </div>
+          </div>
+          <div class="alert alert-danger" *ngIf="smalltext.touched && smalltext.invalid">
+            <p>Small Text can't be blank.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Button Text <span class="c-red">*</span></label>
+          <input type="text" class="form-control" id="buttontext" name="buttontext" placeholder="Enter button Text"
+            #buttontext="ngModel" [(ngModel)]="slider_obj.buttontext" required />
+          <div class="alert alert-danger" *ngIf="buttontext.touched && buttontext.invalid">
+            <p>Button Text can't be blank.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Button Link <span class="c-red">*</span></label>
+          <input type="text" class="form-control" id="buttonlink" name="buttonlink" placeholder="Enter Button Link"
+            #buttonlink="ngModel" [(ngModel)]="slider_obj.buttonlink" required />
+          <div class="alert alert-danger" *ngIf="buttonlink.touched && buttonlink.invalid">
+            <p>Button Link can't be blank.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-block  mb-2 mt-4">
+      <button type="submit" *ngIf="dialogType == 'add'" class="btn green-btn"
+        [disabled]="f.invalid || !slider_obj.name || !slider_obj.seotitle || !slider_obj.seodescription || !slider_obj.sliderImageUrl || !slider_obj.sliderAwardImageUrl || !slider_obj.slug || !slider_obj.bigtext ||  !slider_obj.smalltext || !slider_obj.buttontext || !slider_obj.buttonlink"
+        (click)="addCategory()">Add
+        category</button>
+      <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn"
+        [disabled]="f.invalid || !slider_obj.name || !slider_obj.slug || !slider_obj.seotitle || !slider_obj.seodescription  || !slider_obj.bigtext || !slider_obj.smalltext || !slider_obj.buttontext || !slider_obj.buttonlink"
+        (click)="updateCategory()">Update category</button>
+      <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
+    </div>
+  </form>
+</div>

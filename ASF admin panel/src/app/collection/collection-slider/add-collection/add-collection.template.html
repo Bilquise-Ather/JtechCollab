@@ -1,0 +1,231 @@
+<div class="container-fluid management-tab">
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+  <div class="row section-box">
+    <div class="col-12">
+      {{ type | titlecase }} Collection
+      <div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <form #f="ngForm" novalidate autocomplete="off">
+            <!-- <button (click)="onClickAddNewColor()">test</button> -->
+            <div class="row">
+
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectionname">Collection Name <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="collectionname" placeholder="Enter Collection Name"
+                    name="collectionname" #collectionname="ngModel" [(ngModel)]="collection.name" required
+                    [class.is-invalid]="f.submitted && collectionname.invalid">
+                  <div class="alert alert-danger"
+                    *ngIf="(collectionname.touched || f.submitted) && collectionname.invalid">
+                    <p>Collection Name can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectionname">Collection Slug <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="collectionslug" placeholder="Enter Collection Slug"
+                    name="collectionslug" #collectionslug="ngModel" [(ngModel)]="collection.slug" required
+                    [class.is-invalid]="f.submitted && collectionslug.invalid" (keyup)="generateSlug($event)">
+                  <div class="alert alert-danger"
+                    *ngIf="(collectionslug.touched || f.submitted) && collectionslug.invalid">
+                    <p>Collection slug can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectiontext">Text <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="collectiontext" placeholder="Enter text"
+                    name="collectiontext" #collectiontext="ngModel" [(ngModel)]="collection.text" required
+                    [class.is-invalid]="f.submitted && collectiontext.invalid">
+                  <div class="alert alert-danger"
+                    *ngIf="(collectiontext.touched || f.submitted) && collectiontext.invalid">
+                    <p>Collection Text can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectiontext">Category View <span class="c-red">*</span></label>
+                  <p-inputSwitch  [(ngModel)]="collection.categoryview" class="input-switch" [ngModelOptions]="{standalone: true}"></p-inputSwitch>
+                  </div>
+
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectiontext">Show in Visualiser <span class="c-red">*</span></label>
+                  <p-inputSwitch  [(ngModel)]="collection.showinvisualiser" class="input-switch" [ngModelOptions]="{standalone: true}"></p-inputSwitch>
+                  </div>
+
+              </div>
+
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectionname">SEO Title <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="seotitle" placeholder="Enter SEO Title" name="seotitle"
+                    #seotitle="ngModel" [(ngModel)]="collection.seotitle" required
+                    [class.is-invalid]="f.submitted && seotitle.invalid">
+                  <div class="alert alert-danger" *ngIf="(seotitle.touched || f.submitted) && seotitle.invalid">
+                    <p>SEO Title can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectionname">SEO Description <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="seodescription" placeholder="Enter SEO Description"
+                    name="seodescription" #seodescription="ngModel" [(ngModel)]="collection.seodescription" required
+                    [class.is-invalid]="f.submitted && seodescription.invalid">
+                  <div class="alert alert-danger"
+                    *ngIf="(seodescription.touched || f.submitted) && seodescription.invalid">
+                    <p>SEO Description can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectiontext">SEO Keywords <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="seokeyword" placeholder="Enter Keywords" name="seokeyword"
+                    #seokeyword="ngModel" [(ngModel)]="collection.seokeyword" required
+                    [class.is-invalid]="f.submitted && seokeyword.invalid">
+                  <div class="alert alert-danger" *ngIf="(seokeyword.touched || f.submitted) && seokeyword.invalid">
+                    <p>Keywords Text can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectiontext">Link</label>
+                  <input type="text" class="form-control" id="link" placeholder="Enter Link" name="link" #link="ngModel"
+                    [(ngModel)]="collection.link">
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectiontext">Video Link</label>
+                  <input type="text" class="form-control" id="videolink" placeholder="Enter Video Link" name="videolink" #videolink="ngModel"
+                    [(ngModel)]="collection.videolink">
+                </div>
+              </div>
+
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Logo Image<span class="c-red">*</span></label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="collection.collectionImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="collection.collectionImageUrl" /></div>
+                      <div class="close-btn-wrapper" (click)="clearCLFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="collection.image && !collection.collectionImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="base_url+'/'+collection.image" /></div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="collectionImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #collectionImageFile type="file" (change)="onCLUpload($event)" accept="image/*"
+                      style="display: none" />
+                  </button>
+                </div>
+              </div>
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Banner Image<span class="c-red">*</span></label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="collection.collectionbannerImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="collection.collectionbannerImageUrl" /></div>
+                      <div class="close-btn-wrapper" (click)="clearBannerCLFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block"
+                    *ngIf="collection.bannerimage && !collection.collectionbannerImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="base_url+'/'+collection.bannerimage" /></div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="collectionbannerImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #collectionbannerImageFile type="file" (change)="onBannerCLUpload($event)" accept="image/*"
+                      style="display: none" />
+                  </button>
+                </div>
+              </div>
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Room Images<span class="c-red">*</span></label>
+                  </div>
+
+                  <div *ngFor='let url of already_uploadedurls;let i=index;'>
+                    <img *ngIf="!url.isdelete" [src]="base_url+'/'+url.image" height="200">
+                    <div *ngIf="!url.isdelete" class="close-btn-wrapper"
+                      (click)="clearAlreadyUploadedFile(url.baseimage)"><i class="fa fa-times-circle"
+                        aria-hidden="true"></i></div>
+
+                  </div>
+
+                  <div *ngFor='let url of urls;let i=index;'>
+                    <img *ngIf="!url.isdelete" [src]="url.url" height="200">
+                    <div *ngIf="!url.isdelete" class="close-btn-wrapper" (click)="clearOptionalFile(i)"><i
+                        class="fa fa-times-circle" aria-hidden="true"></i></div>
+
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="roomImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #roomImageFile type='file' (change)="onSelectFile($event)" multiple accept="image/*"
+                      style="display: none">
+
+                  </button>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="col-12">
+                <button *ngIf="!collection._id"
+                  [disabled]="f.invalid || !collection.collectionImageUrl || !collection.collectionbannerImageUrl || files.length == 0"
+                  type="submit" class="btn green-btn" (click)="onClickSave()">Save Collection</button>
+                <button *ngIf="collection._id" [disabled]="f.invalid" type="submit" class="btn green-btn"
+                  (click)="onClickSave()">Update Collection</button>
+                <button type="button" class="btn gray-btn ml-4" (click)="onClickCancel()">Cancel</button>
+              </div>
+            </div>
+          </form>
+          <div>
+          </div>
+
+
+
+
+          <app-footer></app-footer>
+        </div>
+        <!-- End of Footer -->
