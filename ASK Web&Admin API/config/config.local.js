@@ -50,13 +50,13 @@ var config = {
     credit_application_image:"/credit_application/",
     claim_application_image:"/claim_application/"
   },
-  SENDGRID_API_KEY:"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",
-  from_email: "jess.pickman@allsouthflooring.com ",
-      host: "smtp.gmail.com",
+  SENDGRID_API_KEY:"",
+  from_email: "",
+      host: "",
       port: 587,
       secure: false,
-      user: 'jess.pickman@allsouthflooring.com ',
-      pass: 'carolinA2018!@'
+      user: ' ',
+      pass: ''
 };
 
 module.exports = config;
