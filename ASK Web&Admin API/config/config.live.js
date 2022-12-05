@@ -41,12 +41,12 @@
         resource_pdf_folder: '/resource_pdf/',
         room_image_folder: "/rooms/",
       },
-      from_email: "jess.pickman@allsouthflooring.com ",
-      host: "smtp.gmail.com",
+      from_email: " ",
+      host: "",
       port: 587,
       secure: false,
-      user: 'jess.pickman@allsouthflooring.com ',
-      pass: 'carolinA2018!@'
+      user: ' ',
+      pass: ''
   };
   
   module.exports = config;
